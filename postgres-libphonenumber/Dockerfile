@@ -2,7 +2,7 @@ FROM zitsen/postgres-pgxn
 
 # Prerequres
 RUN apt-get update \
-    && apt-get install -y protobuf-compiler libre2-dev libgtest-dev libicu-dev libprotobuf-dev libboost-date-time-dev libboost-system-dev libboost-thread-dev libboost-dev openjdk-7-jre \
+    && apt-get install -y protobuf-compiler libre2-dev libgtest-dev libicu-dev libprotobuf-dev libboost-date-time-dev libboost-system-dev libboost-thread-dev libboost-dev openjdk-7-jre cmake \
     && rm -rf /var/lib/apt/lists/*
 
 # Install libphonenumber
