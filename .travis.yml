@@ -3,7 +3,7 @@ services:
 
 script:
   - docker build -t zitsen/postgres-pgxn .
-  - docker build -t zitsen/postgres-libphonenumber .
+  - docker build -t zitsen/postgres-libphonenumber postgres-libphonenumber
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
