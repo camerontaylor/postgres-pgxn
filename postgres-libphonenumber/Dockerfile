@@ -8,7 +8,7 @@ RUN apt-get update \
 # Install libphonenumber
 RUN cd /tmp && git clone --depth 1 https://github.com/googlei18n/libphonenumber.git \
     && cd libphonenumber/cpp \
-    && make build && cd build \
+    && mkdir build && cd build \
     && cmake .. && make && make install \
     && rm -rf /tmp/phonenumber
 
