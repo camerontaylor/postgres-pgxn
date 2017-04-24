@@ -9,10 +9,10 @@ RUN apt-get update \
 RUN cd /tmp && git clone --depth 1 https://github.com/googlei18n/libphonenumber.git \
     && cd libphonenumber/cpp \
     && mkdir build && cd build \
-    && cmake .. && make && make install \
+    && cmake .. && make -j 8 && make install \
     && rm -rf /tmp/phonenumber
 
 RUN cd /tmp && git clone https://github.com/blm768/pg-libphonenumber.git \
     && cd pg-libphonenumber \
     && sed 's/static_assert/\/\/static_assert/' -i src/short_phone_number.h \
-    && make && make install && rm -rf /tmp/pg-libphonenumber
+    && make -j 8 && make install && rm -rf /tmp/pg-libphonenumber
