@@ -9,8 +9,7 @@ RUN curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
     && chmod +x cpanm \
     && ./cpanm -n Digest::HMAC_SHA1 \
     && rm -fr ./cpanm /root/.cpanm
-RUN pip install pgxnclient \
-    && pgxn install otp
+RUN pip install pgxnclient
 
 RUN cd /tmp \
     && git clone https://github.com/blm768/pg-libphonenumber \
