@@ -9,7 +9,7 @@ RUN apt-get update \
 RUN cd /tmp && git clone --depth 1 https://github.com/googlei18n/libphonenumber.git \
     && cd libphonenumber/cpp \
     && mkdir build && cd build \
-    && cmake .. && make -j 8 && make install \
+    && cmake -DCMAKE_INSTALL_PREFIX=/usr .. && make -j 8 && make install \
     && rm -rf /tmp/phonenumber
 
 RUN cd /tmp && git clone https://github.com/blm768/pg-libphonenumber.git \
