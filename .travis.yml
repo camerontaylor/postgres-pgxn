@@ -1,7 +1,7 @@
 services:
     - docker
 
-before_install:
+script:
   - docker build -t zitsen/postgres-pgxn .
 
 after_success:
