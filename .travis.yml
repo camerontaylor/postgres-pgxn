@@ -4,10 +4,12 @@ services:
 script:
   - docker build -t zitsen/postgres-pgxn .
   - docker build -t zitsen/postgres-libphonenumber postgres-libphonenumber
+  - docker build -t zitsen/postgres-libphonenumber:plv8 -f postgres-libphonenumber/Dockerfile.plv8 .
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
       docker push zitsen/postgres-pgxn;
       docker push zitsen/postgres-libphonenumber;
+      docker push zitsen/postgres-libphonenumber:plv8;
     fi
