@@ -5,7 +5,7 @@ MAINTAINER Linhe Huo <linhe.huo@gmail.com>
 RUN apt-get update \
     && apt-get install -y protobuf-compiler libre2-dev libgtest-dev libicu-dev libprotobuf-dev \
       libboost-date-time-dev libboost-system-dev libboost-thread-dev libboost-dev openjdk-7-jre \
-      git-core cmake \
+      git-core cmake build-essential \
     # Install libphonenumber
     && cd /tmp && git clone --depth 1 https://github.com/googlei18n/libphonenumber.git \
     && cd libphonenumber/cpp \
@@ -18,7 +18,8 @@ RUN apt-get update \
     && sed 's/static_assert/\/\/static_assert/' -i src/short_phone_number.h \
     && make -j 8 && make install && rm -rf /tmp/pg-libphonenumber \
     && apt-get remove -y protobuf-compiler libre2-dev libgtest-dev libicu-dev libprotobuf-dev \
-      libboost-date-time-dev libboost-system-dev libboost-thread-dev libboost-dev openjdk-7-jre cmake \
+      libboost-date-time-dev libboost-system-dev libboost-thread-dev libboost-dev openjdk-7-jre \
+      git-core cmake build-essential \
     && apt-get autoremove -y \
     && apt-get install -y libprotobuf9 libboost-date-time1.55.0 libboost-system1.55.0 libboost-thread1.55.0 libicu52 \
     && apt-get clean \
