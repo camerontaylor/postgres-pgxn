@@ -1,0 +1,27 @@
+FROM postgres:9.6
+
+MAINTAINER Linhe Huo <linhe.huo@gmail.com>
+
+ENV PLV8_VERSION v2.0.3
+
+RUN buildDependencies="build-essential ca-certificates curl git-core postgresql-server-dev-$PG_MAJOR python-pip" \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends ${buildDependencies} \
+    && mkdir -p /tmp/build \
+    && curl -o /tmp/build/${PLV8_VERSION}.tar.gz -SL "https://github.com/plv8/plv8/archive/$PLV8_VERSION.tar.gz" \
+    && cd /tmp/build \
+    && tar -xzf /tmp/build/${PLV8_VERSION}.tar.gz -C /tmp/build/ \
+    && cd /tmp/build/plv8-${PLV8_VERSION#?} \
+    && make -j 4 static \
+    && make install \
+    && strip /usr/lib/postgresql/${PG_MAJOR}/lib/plv8.so \
+    && curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
+    && chmod +x cpanm \
+    && ./cpanm -n App::cpanminus App::Sqitch DBD::Pg \
+    && pip install pgxnclient \
+    && pgxn install pgTAP \
+    && apt-get clean \
+    && apt-get remove ${buildDependencies} -y \
+    && apt-get autoremove -y \
+    && cd / \
+    && rm -rf /tmp/build /var/lib/apt/lists/*
