@@ -18,7 +18,5 @@ RUN buildDependencies="build-essential ca-certificates curl git-core postgresql-
     && pip install pgxnclient \
     && pgxn install pgTAP \
     && apt-get clean \
-    && apt-get remove ${buildDependencies} -y \
-    && apt-get autoremove -y \
     && cd / \
     && rm -rf /tmp/build /var/lib/apt/lists/*
