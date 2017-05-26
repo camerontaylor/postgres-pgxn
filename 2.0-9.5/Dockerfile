@@ -15,9 +15,6 @@ RUN buildDependencies="build-essential ca-certificates curl git-core postgresql-
     && make -j 4 static \
     && make install \
     && strip /usr/lib/postgresql/${PG_MAJOR}/lib/plv8.so \
-    && curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
-    && chmod +x cpanm \
-    && ./cpanm -n App::cpanminus App::Sqitch DBD::Pg \
     && pip install pgxnclient \
     && pgxn install pgTAP \
     && apt-get clean \
